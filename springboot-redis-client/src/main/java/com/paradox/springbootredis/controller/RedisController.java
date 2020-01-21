@@ -2,9 +2,12 @@ package com.paradox.springbootredis.controller;
 
 import com.paradox.springbootredis.model.Person;
 import com.paradox.springbootredis.service.PersonService;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -27,6 +30,12 @@ public class RedisController {
     @GetMapping("/personsByFirstName/{firstName}")
     public ResponseEntity<List<Person>> personsByFirstName(@PathVariable String firstName) {
         List<Person> personList = personService.findByFirstName(firstName);
+        return ResponseEntity.ok(personList);
+    }
+
+    @GetMapping("/personsByFirstNameReadOnly/{firstName}")
+    public ResponseEntity<List<Person>> personsByFirstNameReadOnly(@PathVariable String firstName) {
+        List<Person> personList = personService.findByFirstNameReadOnly(firstName);
         return ResponseEntity.ok(personList);
     }
 
