@@ -24,7 +24,6 @@ public class PersonService {
 
     private RestTemplate restTemplate;
 
-    @CacheEvict(value = "person", allEntries = true)
     public Person addPerson(String firstName, String lastName) {
         Person person = Person.builder()
                 .firstName(firstName)
@@ -36,6 +35,7 @@ public class PersonService {
 
     @Cacheable(value = "person")
     public List<Person> findAll() {
+        log.info("called method findAll");
         return Arrays.asList(Objects.requireNonNull(restTemplate.getForEntity(DATA_SERVICE_URL + "persons", Person[].class).getBody()));
     }
 

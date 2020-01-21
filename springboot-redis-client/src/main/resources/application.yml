@@ -4,4 +4,6 @@ spring:
     password: password
     host: localhost
     url: redis://localhost:6379
-
+    timeout: 500ms
+server:
+  port: 8083
